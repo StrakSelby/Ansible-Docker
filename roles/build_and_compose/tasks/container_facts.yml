@@ -1,0 +1,57 @@
+---
+#This part will gather fact about the container and check if it running
+- name: Get infos on reverseproxy container
+  community.docker.docker_container_info:
+    name: reverseproxy
+  register: result1
+  tags: info
+
+- name: Does reverseproxy container exist?
+  ansible.builtin.debug:
+    msg: "The container {{ 'exists' if result1.exists else 'does not exist' }}"
+  tags: info
+
+- name: Get infos on wordpress container
+  community.docker.docker_container_info:
+    name: wordpress
+  register: result2
+  tags: info
+
+- name: Does wordpress container exist?
+  ansible.builtin.debug:
+    msg: "The container {{ 'exists' if result2.exists else 'does not exist' }}"
+  tags: info
+
+- name: Get infos on mariadb container
+  community.docker.docker_container_info:
+    name: mariadb
+  register: result3
+  tags: info
+
+- name: Does mariadb container exist?
+  ansible.builtin.debug:
+    msg: "The container {{ 'exists' if result3.exists else 'does not exist' }}"
+  tags: info
+
+#This part will output the info of the contianer 
+- name: Print reverse proxy container name and ID
+  ansible.builtin.debug:
+    msg: 
+      "Container name: {{ result1.container.Name }}, Container ID: {{ result1.container.Id }}"
+  when: result1
+  tags: print_info
+
+- name: Print wordpress container name and ID
+  ansible.builtin.debug:
+    msg: 
+      "Container name: {{ result2.container.Name }}, Container ID: {{ result2.container.Id }}"
+  when: result2
+  tags: print_info
+
+- name: Print mariadb container name and ID
+  ansible.builtin.debug:
+    msg: 
+      "Container name: {{ result3.container.Name }}, Container ID: {{ result3.container.Id }}"
+  when: result2
+  tags: print_info
+

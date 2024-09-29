@@ -1,0 +1,28 @@
+---
+- name: Remove nginx image
+  community.docker.docker_image:
+    name: reverseproxy
+    state: absent
+  tags: remove_reverseproxy
+
+- name: Remove mariadb image
+  community.docker.docker_image:
+    name: database
+    state: absent
+  tags: remove_mariadb
+
+- name: Remove wordpress image
+  community.docker.docker_image:
+    name: wordpress_site
+    state: absent
+  tags: remove_wordpress
+
+- name: Remove docker images
+  community.docker.docker_image:
+    name: "{{ item }}"
+    state: absent
+  loop:
+    - nginx:latest
+    - mariadb:latest
+    - wordpress:latest
+  tags: remove_all

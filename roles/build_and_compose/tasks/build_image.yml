@@ -1,0 +1,21 @@
+---
+- name: Build nginx reverse proxy image
+  community.docker.docker_image_build:
+    name: reverseproxy:latest
+    path: /home/Ansible_Docker/roles/build_and_compose/templates/nginx/
+    dockerfile: dockerfile
+  tags: build_nginx
+
+- name: Build wordpress site image
+  community.docker.docker_image_build:
+    name: wordpress_site:latest
+    path: /home/Ansible_Docker/roles/build_and_compose/templates/wordpress/
+    dockerfile: dockerfile
+  tags: build_wordpress
+
+- name: Build mariadb image
+  community.docker.docker_image_build:
+    name: database:latest
+    path: /home/Ansible_Docker/roles/build_and_compose/templates/mariadb/
+    dockerfile: dockerfile
+  tags: build_mariadb

@@ -1,0 +1,18 @@
+---
+- name: Pull docker images
+  community.docker.docker_image_pull:
+    name: "{{ item }}"
+    pull: always
+  loop:
+      - nginx:latest
+      - wordpress:latest
+      - mariadb:latest
+  tags: pull_image
+  register: output
+
+- name: The pulling process
+  ansible.builtin.debug:
+    var: output
+
+
+

@@ -1,0 +1,21 @@
+---
+#run this task to tag the image and push it to docker hub
+- name: Push an image1
+  community.docker.docker_image_push:
+    name: vannaboth/webserver:"{{ tag1 }}"
+    tag: "{{ tag1 }}"
+  tags: taggin_images
+
+- name: Push an image2
+  community.docker.docker_image_push:
+    name: vannaboth/webserver:"{{ tag2 }}"
+    tag: "{{ tag2 }}"
+  tags: taggin_images
+
+- name: Push an image3
+  community.docker.docker_image_push:
+    name: vannaboth/webserver:"{{ tag3 }}"
+    tag: "{{ tag3 }}"
+  tags: taggin_images
+
+

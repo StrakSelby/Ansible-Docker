@@ -1,0 +1,10 @@
+---
+- name: Running docker using ansible
+  hosts: docker
+  become: true
+  roles:
+    - role: build_and_compose
+      tags: work_with_image
+
+
+

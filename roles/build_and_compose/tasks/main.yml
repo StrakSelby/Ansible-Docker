@@ -1,0 +1,18 @@
+---
+- name: Pulling docker image
+  ansible.builtin.import_tasks: pull_image.yml
+
+- name: Build docker image
+  ansible.builtin.import_tasks: build_image.yml
+
+- name: Managing docker container with compose
+  ansible.builtin.import_tasks: compose_container.yml
+
+- name: Container information
+  ansible.builtin.import_tasks: container_facts.yml
+
+#carefully with this part 
+- name: Removing docker image
+  ansible.builtin.import_tasks: remove_image.yml
+
+

@@ -1,0 +1,45 @@
+---
+- name: run docker compose
+  community.docker.docker_compose_v2:
+    project_src: /home/Ansible_Docker/roles/build_and_compose/templates/
+  tags: compose_up
+  register: compose_up
+
+- name: Show results compose_up
+  ansible.builtin.debug:
+    var: compose_up
+  tags: compose_up
+
+- name: stop docker compose
+  community.docker.docker_compose_v2:
+    project_src: /home/Ansible_Docker/roles/build_and_compose/templates/
+    state: stopped
+  tags: compose_down
+  register: compose_down
+
+- name: Show results compose_down
+  ansible.builtin.debug:
+    var: compose_down
+  tags: compose_down
+
+- name: restart docker compose
+  community.docker.docker_compose_v2:
+    project_src: /home/Ansible_Docker/roles/build_and_compose/templates/
+    state: restarted
+  tags: compose_restart
+  register: compose_restart
+
+- name: Show results compose_restart
+  ansible.builtin.debug:
+    var: compose_restart
+  register: compose_restart
+
+- name: Remove containers
+  community.docker.docker_container:
+    name: "{{ item }}"
+    state: absent
+  loop: 
+    - wordpress
+    - mariadb
+    - reverseproxy
+  tags: remove_containers
